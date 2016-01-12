@@ -5,7 +5,7 @@
 ###############################################################################
 
 SUBDIRS  = demo 
-CLEANER_SUBDIRS = chip
+CLEANER_SUBDIRS = src
 
 AVRIO_SOLARPI_BOARD_DIR = $(subst \,/,$(AVRIO_ROOT))/board/epsilonrt/gifam-chip
 
@@ -21,7 +21,7 @@ har: $(SUBDIRS)
 debug: $(SUBDIRS)
 cpboard:
 	#echo $(AVRIO_SOLARPI_BOARD_DIR)
-	cp chip/board/* $(AVRIO_SOLARPI_BOARD_DIR)
+	cp src/board/* $(AVRIO_SOLARPI_BOARD_DIR)
 
 elf: $(SUBDIRS)
 hex: $(SUBDIRS)

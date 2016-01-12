@@ -1,0 +1,11 @@
+*.aws
+*.hex
+*.elf
+*.eep
+*.map
+*.lss
+*.bak
+.codelite
+.clang
+.tern*
+compile_commands.json
