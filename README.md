@@ -6,6 +6,8 @@ Le microcontroleur __attiny45__ reçoit ses ordres par l'intermédiaire d'un bus
 Les sources du firmware du microcontroleur __attiny45__ sont publiées sous licence open source.
 
 
+
+
 ##Interface matérielle
 
 ###Détection de zéro
