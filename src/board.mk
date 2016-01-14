@@ -46,10 +46,10 @@ AVRDUDE_PORT = usb
 endif
 
 # Fuses and lock for fuse target
-#AVRDUDE_LFUSE = 0xE2
-#AVRDUDE_HFUSE = 0xD7
-#AVRDUDE_EFUSE = 0x01
-#AVRDUDE_LOCK  = 0x0F
+AVRDUDE_LFUSE = 0xE2
+AVRDUDE_HFUSE = 0xDF
+AVRDUDE_EFUSE = 0x01
+AVRDUDE_LOCK  = 0x00
 
 endif
 #----------------------------------------------------------------------------
