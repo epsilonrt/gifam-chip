@@ -51,7 +51,6 @@ main (void) {
   for (;;) {
 
     vGifamSet (eMode);
-    vAssert (eGifamGet() == eMode);
     vLedClear (LED_ALL_LEDS);
     vLedSet (xLedGetMask (eMode));
     
@@ -66,8 +65,11 @@ main (void) {
       vGifamSet (ModeConfort);
       // Attente appui BP
       delay_ms (250);
-      while (xButGet(BUTTON_BUTTON1) == 0)
-        ;
+      while (xButGet(BUTTON_BUTTON1) == 0) {
+
+        vLedToggle (xLedGetMask (eMode));
+        delay_ms (20);
+      }
     }
     
     delay_ms (250);
