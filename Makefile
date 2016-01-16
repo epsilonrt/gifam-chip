@@ -5,7 +5,7 @@
 ###############################################################################
 
 SUBDIRS  = demo 
-CLEANER_SUBDIRS = src
+CLEANER_SUBDIRS = chip
 
 AVRIO_SOLARPI_BOARD_DIR = $(subst \,/,$(AVRIO_ROOT))/board/epsilonrt/gifam-chip
 

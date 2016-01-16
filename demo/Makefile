@@ -38,8 +38,8 @@ GIT_VERSION = OFF
 
 # Configuration de AvrIO
 # -------------------------------
-AVRIO_CONFIG  = LED_MASK_ARRAY_ENABLE
-AVRIO_CONFIG += TWI_MASTER_ENABLE
+AVRIO_CONFIG  = TWI_MASTER_ENABLE
+AVRIO_CONFIG += LED_MASK_ARRAY_ENABLE
 
 # Valide le noyau multitâche temps réel AVRX (sous forme de bibliothèque)
 AVRX = OFF

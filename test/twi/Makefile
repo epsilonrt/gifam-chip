@@ -90,7 +90,6 @@ DISABLE_DELETE_UNUSED_SECTIONS = OFF
 # d'accès complet du fichier mais seulement le nom du projet (avrio, avrx, ...)
 SRC  = $(TARGET).c avrio/twi_noirq.c avrio/file.c avrio/tc.c avrio/tc_poll.c 
 SRC += avrio/dpin.c avrio/term.c
-#avrio/queue.c
 
 # Liste des fichiers source C++. (Les dépendances sont automatiquement générées.)
 # Le chemin d'accès des fichiers sources systèmes a été ajouté au chemin de
@@ -158,12 +157,12 @@ LDFLAGS  +=
 #AVRDUDE_PORT = lpt1
 
 # JTAG ICE MkII
-AVRDUDE_PROGRAMMER  = jtag2
+#AVRDUDE_PROGRAMMER  = jtag2
 #AVRDUDE_PORT = usb
 
 # AVR Dragon
 #AVRDUDE_PROGRAMMER = dragon_isp
-#AVRDUDE_PROGRAMMER = dragon_jtag
+AVRDUDE_PROGRAMMER = dragon_jtag
 #AVRDUDE_PROGRAMMER = dragon_dw
 AVRDUDE_PORT = usb
 
