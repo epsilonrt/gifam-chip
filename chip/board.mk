@@ -1,11 +1,8 @@
-# Hey Emacs, this is a -*- makefile -*-
-#----------------------------------------------------------------------------
-# $Id$
-# List any extra directories to look for include files here.
-#     Each directory must be seperated by a space.
-#     Use forward slashes for directory separators.
-#     For a directory that has spaces, enclose it in quotes.
-EXTRA_INCDIRS += $(PROJECT_TOPDIR)/src
+###############################################################################
+# Copyright © 2013-2016 Pascal JEAN aka epsilonRT <pascal.jean--AT--btssn.net>#
+# All rights reserved.                                                        #
+# This software is governed by the CeCILL license <http://www.cecill.info>    #
+###############################################################################
 
 #----------------------------------------------------------------------------
 ifeq ($(BOARD),GIFAM_CHIP)
@@ -48,7 +45,7 @@ endif
 # Fuses and lock for fuse target
 AVRDUDE_LFUSE = 0xE2
 AVRDUDE_HFUSE = 0xDF
-AVRDUDE_EFUSE = 0x01
+#AVRDUDE_EFUSE = 0x01
 AVRDUDE_LOCK  = 0x00
 
 endif

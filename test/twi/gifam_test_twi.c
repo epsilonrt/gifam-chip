@@ -139,16 +139,16 @@ vPrintMenu (void) {
 // Dialogue permettant de modifier les tests en fonction
 void
 vUpdateFlag (void) {
-  char cKey;
+  int c;
 
   vPrintMenu();
   printf_P (PSTR ("Choice ? "));
 
   for (;;) {
 
-    cKey = getchar();
+    c = getchar();
 
-    switch (cKey) {
+    switch (c) {
 
       case 'W':
       case 'w':
@@ -174,6 +174,8 @@ vUpdateFlag (void) {
       case '\n':
         vPrintFlags();
         return;
+      case EOF:
+        break;
       default:
         putchar ('?');
         break;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Workspace Name="gifam-chip" Database="" SWTLW="No">
+<CodeLite_Workspace Name="gifam-chip" Database="">
   <Project Name="gifam-chip" Path="gifam-chip.project" Active="No"/>
   <Project Name="gifam-chip-firmware" Path="firmware/gifam-chip-firmware.project" Active="Yes"/>
   <Project Name="gifam-chip-test-delay" Path="test/delay/gifam-chip-test-delay.project" Active="No"/>
