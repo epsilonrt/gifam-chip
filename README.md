@@ -66,7 +66,7 @@ Une écriture permet de modifier le mode GIFAM, une lecture de le lire. Ce qui d
 L'octet lu ou écrit (Mode byte) peut prendre les valeurs suivantes:
 
 <table>
-<caption align="left"><b>Mode byte</b></caption>
+<caption><b>Mode byte</b></caption>
 <tr><th>#</th><th>Mode</th><th>Commande sur le fil pilote</th></tr>
 <tr><td>0</td><td>Confort</td><td>Pas de signal (neutre ou en l'air)</td></tr>
 <tr><td>1</td><td>Arret forcé</td><td>Alternance positive</td></tr>
@@ -200,7 +200,7 @@ Le schéma complet de la carte d'évaluation __gifam-chip-evb__ est disponible d
 ###Analyse du fonctionnement de la commande secteur
 
 ####Détection de zéro
-![Alimentation capacitivehttp://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/zcross.png)
+![Détection de zéro](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/zcross.png)
 
 Le signal de phase du secteur __L__ est transformé en un signal rectangulaire __ZC__ en opposition de phase avec ce dernier. R7, D4 et D7 assure un écrêtage de la tension secteur afin de commander le transistor MOSFET Q1 en saturé/bloqué. L'opto-coupleur U1 assure un isolement galvanique entre le secteur et le microcontrôleur. L'alternance positive du secteur déclencle la saturation de Q1, qui allume la led de l'opto-coupleur U1 et sature le transistor de sortie qui affirme le signel __ZC__ à 0. Lors de l'alternance négative du secteur, Q1 est bloqué, la led de U1 est éteinte et ZC est à l'état haut.
 
@@ -211,6 +211,6 @@ Cette alimentation fournit le +5V nécessaire à l'alimentation de la led de U1 
 Comme indiqué dans l'article [Alimentation capacitive de Wikipedia](https://fr.wikipedia.org/wiki/Alimentation_capacitive), l'alimentation capacitive est une alimentation électrique qui utilise la réactance capacitive d'un condensateur pour réduire la tension du réseau à une tension plus basse. Une alimentation capacitive est constituée d'un condensateur, ici C2 en parallèle avec C3, dont la réactance limite le courant qui passe à travers les diodes D1 et D2 qui assure un redressement. Comme protection contre les pointes de tension au cours des opérations de commutation, il y a une résistance R5 connectée en série. Un condensateur électrolytique C1 filtre la tension continue afin que la diode zener D3 assure une stabilisation de la tension à 5V. Un calcul complet des éléments est décrit dans le document [AN954 Transformerless Power Supplies: Resistive and Capacitive](http://ww1.microchip.com/downloads/en/AppNotes/00954A.pdf) de Microchip.
 
 ####Interrupteur commandé
-![Alimentation capacitive(http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/acswitch.png)
+![Interrupteur commandé](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/acswitch.png)
 
 Cette partie permet de découper la tension secteur __L__ pour générer le signal pilote __G__. L'opto-triac U3 assure un isolement galvanique entre le secteur et le microcontrôleur. Lorsque le signal __GIFAM__ est à l'état bas, la led de l'opto-triac U3 est allumée ce qui active le triac interne et la gachette du triac U4. R9 limite le courant de gâchette alors que R14 constitue une charge faisant circuler un petit courant dans le circuit de puissance du triac lorsque le signal __G__ n'est connecté  à aucun radiateur. Le signal __GIFAM__ est activé ou non par le microcontrôleur attiny45 en fonction du mode GIFAM souhaité et de l'alternance du secteur en cours (donnée par ZC).
