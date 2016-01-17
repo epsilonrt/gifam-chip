@@ -48,15 +48,15 @@ AD0 correspond à l'état de la broche correspondante et permet donc de contrôl
 Une écriture permet de modifier le mode GIFAM, une lecture de le lire. Ce qui donne les échanges suivants:
 
 <table>
-<caption align="left"><b>Echange en écriture</b></caption>
+<caption><b>Echange en écriture</b></caption>
 <tr><th>S</th><th>0</th><th>0</th><th>1</th><th>0</th><th>0</th><th>0</th><th>AD0</th><th>0</th><th>A</th><th>D7</th><th>D6</th><th>D5</th><th>D4</th><th>D3</th><th>D2</th><th>D1</th><th>D0</th><th>A</th><th>P</th></tr>
 <tr><td></td><td colspan="8" align="center"><b>Slave Address Byte</b></td><td></td><td colspan="8" align="center"><b>Mode Byte</b></td><td></td><td></td></tr>
 </table>
 
 <table>
-<caption align="left"><b>Echange en lecture</b></caption>
+<caption><b>Echange en lecture</b></caption>
 <tr><th>S</th><th>0</th><th>0</th><th>1</th><th>0</th><th>0</th><th>0</th><th>AD0</th><th>1</th><th>A</th><th>D7</th><th>D6</th><th>D5</th><th>D4</th><th>D3</th><th>D2</th><th>D1</th><th>D0</th><th>A</th><th>P</th></tr>
-<tr><td></td><td colspan="8" align="center"><b>Slave Address Byte</b></td><td></td><td colspan="8 align="center"><b>Mode Byte</b></td><td></td><td></td></tr>
+<tr><td></td><td colspan="8" align="center"><b>Slave Address Byte</b></td><td></td><td colspan="8" align="center"><b>Mode Byte</b></td><td></td><td></td></tr>
 </table>
 
 - __S__ Condition de start
