@@ -1,3 +1,5 @@
+<link href="http://kevinburke.bitbucket.org/markdowncss/markdown.css" rel="stylesheet"></link>
+
 #Gifam Chip
 __Gifam chip__ permet la commande d'un radiateur électrique équipé d'un fil pilote à l'aide d'un microcontroleur ATMEL AVR [attiny45](http://www.atmel.com/devices/attiny45.aspx) à 8 broches. La commande par fil pilote d'un radiateur est décrite sur <http://www.radiateur-electrique.org/fil-pilote-radiateur.php>
 
