@@ -8,9 +8,22 @@
  */
 #include <util/atomic.h>
 #include <firmware/zcross.h>
+#include <gifam.h>
 #include "config.h"
 
 /* constants ================================================================ */
+// Aucun signal sur fil pilote
+#define GIFAM_NONE  0x00
+// Alternance positive sur fil pilote
+#define GIFAM_POS   0x01
+// Alternance négative sur fil pilote
+#define GIFAM_NEG   0x02
+// Alternance positive et négative sur fil pilote
+#define GIFAM_ALL   (GIFAM_POS + GIFAM_NEG)
+// Modes étendus (Confort -1 ou -2°C)
+#define GIFAM_EXTEND    0x08
+// 7 secondes d'activation
+#define GIFAM_EXT_M2    0x04
 
 // Durée des commandes Modes Confort -1 et -2°C en secondes
 #define GIFAM_M12_PERIOD    (5*60)    // 5 min.
@@ -42,14 +55,22 @@ static volatile uint16_t usGifamExtendedCounter;
 static inline void
 prvvGifamOn (void) {
 
+#if GIFAMOUT_POL == 0
   GIFAMOUT_PORT &= ~_BV(GIFAMOUT_BIT);
+#else
+  GIFAMOUT_PORT |= _BV(GIFAMOUT_BIT);
+#endif
 }
 
 // -----------------------------------------------------------------------------
 static inline void
 prvvGifamOff (void) {
 
+#if GIFAMOUT_POL == 0
   GIFAMOUT_PORT |= _BV(GIFAMOUT_BIT);
+#else
+  GIFAMOUT_PORT &= ~_BV(GIFAMOUT_BIT);
+#endif
 }
 
 // -----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="gifam-avrio-demo" InternalType="">
+<CodeLite_Project Name="gifam-demo" InternalType="">
   <Plugins>
     <Plugin Name="qmake">
       <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
@@ -123,7 +123,7 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="gifam-avrio-demo">
+  <VirtualDirectory Name="gifam-demo">
     <File Name="Makefile"/>
     <File Name="gifam_demo.c"/>
     <File Name="gifam.c"/>

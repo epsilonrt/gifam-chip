@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Workspace Name="gifam-chip" Database="">
-  <Project Name="gifam-chip" Path="gifam-chip.project" Active="No"/>
+<CodeLite_Workspace Name="gifam-chip" Database="" SWTLW="No">
   <Project Name="gifam-chip-firmware" Path="firmware/gifam-chip-firmware.project" Active="Yes"/>
   <Project Name="gifam-chip-test-delay" Path="test/delay/gifam-chip-test-delay.project" Active="No"/>
   <Project Name="gifam-chip-test-gifam" Path="test/gifam/gifam-chip-test-gifam.project" Active="No"/>
@@ -9,9 +8,9 @@
   <Project Name="gifam-chip-test" Path="test/gifam-test.project" Active="No"/>
   <Project Name="gifam-chip-test-button" Path="test/button/gifam-chip-test-button.project" Active="No"/>
   <Project Name="gifam-test" Path="test/gifam-test.project" Active="No"/>
+  <Project Name="gifam-chip" Path="gifam-chip.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
-      <Project Name="gifam-chip" ConfigName="Debug"/>
       <Project Name="gifam-chip-firmware" ConfigName="Debug"/>
       <Project Name="gifam-chip-test-delay" ConfigName="Debug"/>
       <Project Name="gifam-chip-test-gifam" ConfigName="Debug"/>
@@ -20,9 +19,9 @@
       <Project Name="gifam-chip-test-button" ConfigName="Debug"/>
       <Project Name="gifam-chip-demo" ConfigName="Debug"/>
       <Project Name="gifam-test" ConfigName="Debug"/>
+      <Project Name="gifam-chip" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
-      <Project Name="gifam-chip" ConfigName="Release"/>
       <Project Name="gifam-chip-firmware" ConfigName="Release"/>
       <Project Name="gifam-chip-test-delay" ConfigName="Release"/>
       <Project Name="gifam-chip-test-gifam" ConfigName="Release"/>
@@ -31,6 +30,7 @@
       <Project Name="gifam-chip-test-button" ConfigName="Release"/>
       <Project Name="gifam-chip-demo" ConfigName="Release"/>
       <Project Name="gifam-test" ConfigName="Release"/>
+      <Project Name="gifam-chip" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

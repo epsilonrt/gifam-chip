@@ -30,43 +30,43 @@ static volatile uint16_t usMainCounter;
 static inline void
 prvvZcrossIrqEnable (void) {
 
-  ZCROSS_PCIR  |= _BV(ZCROSS_PCIE);
+  ZCROSS_PCIR  |= _BV (ZCROSS_PCIE);
 }
 
 // -----------------------------------------------------------------------------
 static inline void
 prvvZcrossIrqDisable (void) {
 
-  ZCROSS_PCIR  &= ~_BV(ZCROSS_PCIE);
+  ZCROSS_PCIR  &= ~_BV (ZCROSS_PCIE);
 }
 
 // -----------------------------------------------------------------------------
 static inline void
 prvvZcrossMesMainFreq (void) {
- 
+
   for (;;) {
-    
+
     while (bMainChecked == false)
       ;
     usMainSum /= ZCROSS_COUNT_MAX;
-    
-    if ( (usMainSum >= P_MIN(60.0)) && (usMainSum <= P_MAX(60.0)) ) {
-    
+
+    if ( (usMainSum >= P_MIN (60.0)) && (usMainSum <= P_MAX (60.0))) {
+
       usMainFreq = 60;
       break;
     }
     else {
-    
-      if ( (usMainSum >= P_MIN(50.0)) && (usMainSum <= P_MAX(50.0)) ) {
-      
+
+      if ( (usMainSum >= P_MIN (50.0)) && (usMainSum <= P_MAX (50.0))) {
+
         usMainFreq = 50;
         break;
       }
       else {
-      
+
         usMainCounter = 0;
         bMainChecked = false;
-        prvvZcrossIrqEnable ();        
+        prvvZcrossIrqEnable ();
       }
     }
   }
@@ -75,21 +75,22 @@ prvvZcrossMesMainFreq (void) {
 // -----------------------------------------------------------------------------
 // Routine d'interruption détection de zéro
 // Déclenchée à chaque demi-période au passage à zéro
-ISR(ZCROSS_vect) {
+ISR (ZCROSS_vect) {
 
   if (bMainChecked) {
-  
-    if (vUserHandler)
+
+    if (vUserHandler) {
       vUserHandler();
+    }
   }
-  else {
+  else { // Mesure de la fréquence secteur
     static uZcrossValue uTimerPreviousValue;
     uZcrossValue uTimerCurrentValue;
 
     uTimerCurrentValue = uZcrossTimerGet();
 
     if (usMainCounter == 0) {
-    
+
       usMainSum = 0;
       uTimerPreviousValue = uTimerCurrentValue;
     }
@@ -99,10 +100,10 @@ ISR(ZCROSS_vect) {
       usMainSum += uTimerDiff;
       uTimerPreviousValue = uTimerCurrentValue;
       if (usMainCounter == ZCROSS_COUNT_MAX) {
-      
+
         prvvZcrossIrqDisable();
         bMainChecked = true;
-      }    
+      }
     }
     usMainCounter++;
   }
@@ -112,24 +113,28 @@ ISR(ZCROSS_vect) {
 // -----------------------------------------------------------------------------
 void
 vZcrossInit (vZcrossHandler vHandler) {
-  
+
   bMainChecked = false;
-  ZCROSS_PORT &= ~_BV(ZCROSS_BIT);
-  ZCROSS_DDR  &= ~_BV(ZCROSS_BIT);
-  ZCROSS_PCMSK  |= _BV(ZCROSS_PCINT);
+  ZCROSS_PORT &= ~_BV (ZCROSS_BIT);
+  ZCROSS_DDR  &= ~_BV (ZCROSS_BIT);
+  ZCROSS_PCMSK  |= _BV (ZCROSS_PCINT);
   vZcrossTimerInit();
   vUserHandler = vHandler;
   prvvZcrossIrqEnable();
   sei();
   prvvZcrossMesMainFreq();
-  prvvZcrossIrqEnable();        
+  prvvZcrossIrqEnable();
 }
 
 // -----------------------------------------------------------------------------
-bool 
+bool
 bZcrossIsPositive (void) {
 
+#if ZCROSS_POL == 0
   return bit_is_clear (ZCROSS_PIN, ZCROSS_BIT);
+#else
+  return bit_is_set (ZCROSS_PIN, ZCROSS_BIT);
+#endif
 }
 
 // -----------------------------------------------------------------------------

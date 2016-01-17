@@ -23,7 +23,7 @@ Le firmware par défaut définit les fonctions de broches de la façon suivante:
 <tr><th>#</th><th>Nom</th><th>Description</th></tr>
 <tr><td>1</td><td>RESET</td><td>Broche de RESET active à l'état bas, doit être équipée d'une résistance de pull-up de 10 k&#x2126; reliée à VCC</td></tr>
 <tr><td>2</td><td>GIFAM</td><td>Signal de découpage de la tension permettant de générer l'ordre sur le fil pilote <sup>1</sup></td></tr>
-<tr><td>3</td><td>ZC</td><td>Entrée de détection du passage à zéro du réseau basse-tension, il s'agit d'un signal binaire qui passe à l'état haut lorsque le réseau est sur son alternance négative<sup>2</sup></td></tr>
+<tr><td>3</td><td>ZC</td><td>Entrée de détection du passage à zéro du secteur, il s'agit d'un signal binaire qui passe à l'état haut lorsque le réseau est sur son alternance négative<sup>2</sup></td></tr>
 <tr><td>4</td><td>GND</td><td>Masse</td></tr>
 <tr><td>5</td><td>SDA</td><td>Signal de données du bus I²C (entrée-sortie), doit être équipée d'une résistance de pull-up reliée à VCC<sup>3</sup></td></tr>
 <tr><td>6</td><td>AD0</td><td>Bit de poid faible de l'adresse I²C</td></tr>
@@ -31,8 +31,8 @@ Le firmware par défaut définit les fonctions de broches de la façon suivante:
 <tr><td>8</td><td>VCC</td><td>Tension d'alimentation (2,7 à 5,5 V)</td></tr>
 </table>
 
-1. La polarité de la broche __GIFAM__ peut être modifiée en modifiant la constante __GIFAM_POL __dans le fichier config.h et en recompilant le firmware.
-2. La polarité de la broche __ZC__ peut être modifiée en modifiant la constante __ZC_POL__dans le fichier config.h et en recompilant le firmware.
+1. La polarité de la broche __GIFAM__ peut être modifiée en modifiant la constante __GIFAMOUT_POL__ dans le fichier config.h et en recompilant le firmware.
+2. La polarité de la broche __ZC__ peut être modifiée en modifiant la constante __ZCROSS_POL__ dans le fichier config.h et en recompilant le firmware.
 3. La valeur de la résistance est calculée conformément au [standard I²C](http://www.ti.com/lit/an/slva689/slva689.pdf), typiquement 4,7k&#x2126; convient très bien pour un système alimenté en 5V (3,3k&#x2126; pour un système 3,3V)
 
 ##Contrôle par l'interface I²C
@@ -43,13 +43,30 @@ Le __gifam-chip__ se comporte comme un esclave I²C, son adresse<sup>1</sup> est
 
 AD0 correspond à l'état de la broche correspondante et permet donc de contrôler 2 gifam-chip sur un même bus I²C.
 
-1. L'adresse de base peut être modifiée en modifiant la constante __TWI_BASE_ADDR __dans le fichier config.h et en recompilant le firmware.
+1. L'adresse de base peut être modifiée en modifiant la constante __TWI_SLAVE_ADDR__ dans le fichier config.h et en recompilant le firmware.
 
-Une écriture permet de modifier le mode GIFAM, une lecture de le lire. 
-
-L'octet lu ou écrit peut prendre les valeurs suivantes:
+Une écriture permet de modifier le mode GIFAM, une lecture de le lire. Ce qui donne les échanges suivants:
 
 <table>
+<caption align="left"><b>Echange en écriture</b></caption>
+<tr><th>S</th><th>0</th><th>0</th><th>1</th><th>0</th><th>0</th><th>0</th><th>AD0</th><th>0</th><th>A</th><th>D7</th><th>D6</th><th>D5</th><th>D4</th><th>D3</th><th>D2</th><th>D1</th><th>D0</th><th>A</th><th>P</th></tr>
+<tr><td></td><td colspan=8><center><b>Slave Address Byte</b></center></td><td></td><td colspan=8><center><b>Mode Byte</b></center></td><td></td><td></td></tr>
+</table>
+
+<table>
+<caption align="left"><b>Echange en lecture</b></caption>
+<tr><th>S</th><th>0</th><th>0</th><th>1</th><th>0</th><th>0</th><th>0</th><th>AD0</th><th>1</th><th>A</th><th>D7</th><th>D6</th><th>D5</th><th>D4</th><th>D3</th><th>D2</th><th>D1</th><th>D0</th><th>A</th><th>P</th></tr>
+<tr><td></td><td colspan=8><center><b>Slave Address Byte</b></center></td><td></td><td colspan=8><center><b>Mode Byte</b></center></td><td></td><td></td></tr>
+</table>
+
+- __S__ Condition de start
+- __P__ Condition de stop
+- __A__ Accusé réception (ACK)
+
+L'octet lu ou écrit (Mode byte) peut prendre les valeurs suivantes:
+
+<table>
+<caption align="left"><b>Mode byte</b></caption>
 <tr><th>#</th><th>Mode</th><th>Commande sur le fil pilote</th></tr>
 <tr><td>0</td><td>Confort</td><td>Pas de signal (neutre ou en l'air)</td></tr>
 <tr><td>1</td><td>Arret forcé</td><td>Alternance positive</td></tr>
@@ -90,6 +107,8 @@ On utilise le module twi de AvrIO, par exemple :
         delay_ms (5000);
       }
     }
+
+___On notera qu'AvrIO utilise une notation alignée à gauche des adresses I²C.___
 
 ####Raspberry Pi en C (SysIO)
 [SysIO](http://www.epsilonrt.com/sysio) est un projet Open Source sous CeCILL Free Software License Version 2.1 dont l'objectif est d'offrir une bibliothèque C, C++ et Python pour accèder aux ressources matérielles du système par une interface standardisée. 
@@ -166,15 +185,32 @@ ___Il suffit donc de désactiver CKDIV8 lorsqu'on doit paramètrer un [attiny45]
 
 La dernière version du firmware est disponible dans le dossier [firmware/](http://gitweb.epsilonrt.com/gifam-chip.git/tree/HEAD:/firmware)
 
-##Carte d'évaluation
-Le schéma complet de la carte d'évaluation __gifam-chip-evb__ est disponible dans le dossier [hardware/](http://gitweb.epsilonrt.com/gifam-chip.git/tree/HEAD:/hardware) au format Proteus 7 avec son PCB et au format PDF dans le dossier [doc/img/](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/gifam-chip-evb.pdf)
+###Modification du firmware
+Il est possible de modifier la configuration du firmware grâce au fichier [chip/config.h](http://gitweb.epsilonrt.com/gifam-chip.git/blob/HEAD:/chip/config.h)
 
-###Détection de zéro
+##Carte d'évaluation
+Le schéma complet de la carte d'évaluation __gifam-chip-evb__ est disponible dans le dossier [hardware/](http://gitweb.epsilonrt.com/gifam-chip.git/tree/HEAD:/hardware) au format Proteus 7 avec son PCB et au format PDF dans le dossier [doc/img/](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/gifam-chip-evb.pdf) :
+
+- J2 asure la liaison I²C vers la carte de contrôle DVKCAN1, Raspberry Pi, Arduino...
+- La phase __L__ et le neutre __N__ du secteur sont connectées à J1 ainsi que le fil pilote __G__ relié au radiateur commandé.
+- La led D5 indique lorsqu'elle est allumée que le fil pilote est actif, éclairée lorsqu'une alternance est présente  (Arrêt forcé ou Hors gel), fortement éclairée lorsque les 2 alternances sont présentes (Mode Economie).
+- Le connecteur ISP J3 permet la programmation du microcontrôleur avec le firmware ou un programme de test. Il permet aussi le débogage pendant les phases de mise au point.
+- Le jumper JP1 permet de régler l'adresse de base I²C du gifam-chip. Mis en place, __AD0__ est à l'état bas (retiré à l'état haut) alors que le bouton poussoir SW1 n'est utilisé que pour les tests du gifam-chip.
+
+###Analyse du fonctionnement de la commande secteur
+
+####Détection de zéro
 ![Alimentation capacitive](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/zcross.png)
 
-###Alimentation capacitive sans transformateur
+Le signal de phase du secteur __L__ est transformé en un signal rectangulaire __ZC__ en opposition de phase avec ce dernier. R7, D4 et D7 assure un écrêtage de la tension secteur afin de commander le transistor MOSFET Q1 en saturé/bloqué. L'opto-coupleur U1 assure un isolement galvanique entre le secteur et le microcontrôleur. L'alternance positive du secteur déclencle la saturation de Q1, qui allume la led de l'opto-coupleur U1 et sature le transistor de sortie qui affirme le signel __ZC__ à 0. Lors de l'alternance négative du secteur, Q1 est bloqué, la led de U1 est éteinte et ZC est à l'état haut.
+
+####Alimentation capacitive sans transformateur
 ![Alimentation capacitive](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/powersupply.png)
 
-###Interrupteur commandé
+Cette alimentation fournit le +5V nécessaire à l'alimentation de la led de U1 à partir du secteur. Il s'agit d'une alimentation capacitive sans transformateur.
+Comme indiqué dans l'article [Alimentation capacitive de Wikipedia](https://fr.wikipedia.org/wiki/Alimentation_capacitive), l'alimentation capacitive est une alimentation électrique qui utilise la réactance capacitive d'un condensateur pour réduire la tension du réseau à une tension plus basse. Une alimentation capacitive est constituée d'un condensateur, ici C2 en parallèle avec C3, dont la réactance limite le courant qui passe à travers les diodes D1 et D2 qui assure un redressement. Comme protection contre les pointes de tension au cours des opérations de commutation, il y a une résistance R5 connectée en série. Un condensateur électrolytique C1 filtre la tension continue afin que la diode zener D3 assure une stabilisation de la tension à 5V. Un calcul complet des éléments est décrit dans le document [AN954 Transformerless Power Supplies: Resistive and Capacitive](http://ww1.microchip.com/downloads/en/AppNotes/00954A.pdf) de Microchip.
+
+####Interrupteur commandé
 ![Alimentation capacitive](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/acswitch.png)
 
+Cette partie permet de découper la tension secteur __L__ pour générer le signal pilote __G__. L'opto-triac U3 assure un isolement galvanique entre le secteur et le microcontrôleur. Lorsque le signal __GIFAM__ est à l'état bas, la led de l'opto-triac U3 est allumée ce qui active le triac interne et la gachette du triac U4. R9 limite le courant de gâchette alors que R14 constitue une charge faisant circuler un petit courant dans le circuit de puissance du triac lorsque le signal __G__ n'est connecté  à aucun radiateur. Le signal __GIFAM__ est activé ou non par le microcontrôleur attiny45 en fonction du mode GIFAM souhaité et de l'alternance du secteur en cours (donnée par ZC).

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="gifam-chip" InternalType="">
+<CodeLite_Project Name="gifam-example-sysio" InternalType="">
   <Plugins>
     <Plugin Name="qmake">
       <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
@@ -28,6 +28,10 @@
   </Plugins>
   <Description/>
   <Dependencies/>
+  <VirtualDirectory Name="gifam-example-sysio">
+    <File Name="Makefile"/>
+    <File Name="gifam-example-sysio.c"/>
+  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -38,13 +42,13 @@
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
-    <Configuration Name="Debug" CompilerType="Cross GCC ( avr )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Debug" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g" C_Options="-g" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
       </Compiler>
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="" IntermediateDirectory="" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/gifam-example-sysio" IntermediateDirectory="." Command="$(IntermediateDirectory)/gifam-example-sysio" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -56,15 +60,12 @@
       <PreBuild/>
       <PostBuild/>
       <CustomBuild Enabled="yes">
-        <Target Name="Program">make program</Target>
-        <Target Name="Fuse">make fuse</Target>
-        <Target Name="Lock">make lock</Target>
         <Target Name="DistClean">make distclean</Target>
-        <RebuildCommand>make rebuild</RebuildCommand>
+        <RebuildCommand>make rebuild DEBUG=ON</RebuildCommand>
         <CleanCommand>make clean</CleanCommand>
-        <BuildCommand>make DEBUG=ON</BuildCommand>
+        <BuildCommand>make all DEBUG=ON</BuildCommand>
         <PreprocessFileCommand/>
-        <SingleFileCommand/>
+        <SingleFileCommand>make $(CurrentFileName).o DEBUG=ON</SingleFileCommand>
         <MakefileGenerationCommand/>
         <ThirdPartyToolName>None</ThirdPartyToolName>
         <WorkingDirectory>$(ProjectPath)</WorkingDirectory>
@@ -80,13 +81,13 @@
         <SearchPaths/>
       </Completion>
     </Configuration>
-    <Configuration Name="Release" CompilerType="Cross GCC ( avr )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Release" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
       </Compiler>
       <Linker Options="-O2" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="" IntermediateDirectory="" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="gifam-example-sysio" IntermediateDirectory="." Command="$(IntermediateDirectory)/gifam-example-sysio" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -98,15 +99,12 @@
       <PreBuild/>
       <PostBuild/>
       <CustomBuild Enabled="yes">
-        <Target Name="Program">make program</Target>
-        <Target Name="Fuse">make fuse</Target>
-        <Target Name="Lock">make lock</Target>
-        <Target Name="Distclean">make distclean</Target>
+        <Target Name="DistClean">make distclean</Target>
         <RebuildCommand>make rebuild</RebuildCommand>
         <CleanCommand>make clean</CleanCommand>
         <BuildCommand>make</BuildCommand>
         <PreprocessFileCommand/>
-        <SingleFileCommand/>
+        <SingleFileCommand>make $(CurrentFileName).o</SingleFileCommand>
         <MakefileGenerationCommand/>
         <ThirdPartyToolName>None</ThirdPartyToolName>
         <WorkingDirectory>$(ProjectPath)</WorkingDirectory>
@@ -123,14 +121,6 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="gifam-chip">
-    <File Name="Makefile"/>
-    <File Name="config.h"/>
-    <File Name="board.mk"/>
-  </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
-  <VirtualDirectory Name="chip">
-    <File Name="gifam.h"/>
-  </VirtualDirectory>
 </CodeLite_Project>

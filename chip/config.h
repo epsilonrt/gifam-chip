@@ -11,16 +11,23 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <gifam.h>
+#include <avrio/defs.h>
 
 /* configuration ============================================================ */
+// Adresse de base esclave du tiny45 sur le bus I2C 
+#define TWI_SLAVE_ADDR 0x20
+
+// Mode GIFAM en sortie au démarrage
+#define GIFAM_MODE_DEFAULT  0
 
 // Broche utilisée pour la commande du fil pilote
+#define GIFAMOUT_POL  0     // 0 active à l'état bas, 1 à l'état haut
 #define GIFAMOUT_DDR  DDRB
 #define GIFAMOUT_PORT PORTB
 #define GIFAMOUT_BIT  3
 
 // Broche utilisée pour la détection de zéro sur la phase secteur
+#define ZCROSS_POL    0     // 0 active à l'état bas, 1 à l'état haut
 #define ZCROSS_DDR    DDRB
 #define ZCROSS_PORT   PORTB
 #define ZCROSS_PIN    PINB
@@ -31,6 +38,12 @@
 #define ZCROSS_PCIE   PCIE
 #define ZCROSS_PCMSK  PCMSK
 #define ZCROSS_PCINT  PCINT4
+
+// Broche AD0
+#define AD0_DDR       DDRB
+#define AD0_PORT      PORTB
+#define AD0_PIN       PINB
+#define AD0_BIT       1
 
 // Précision de la fréquence en % du réseau BT et de l'oscillateur
 #define F_ACCURACY 3

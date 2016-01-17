@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="gifam-chip" InternalType="">
+<CodeLite_Project Name="gifam-example-avrio" InternalType="">
   <Plugins>
     <Plugin Name="qmake">
       <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
@@ -123,14 +123,10 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="gifam-chip">
+  <VirtualDirectory Name="gifam-example-avrio">
     <File Name="Makefile"/>
-    <File Name="config.h"/>
-    <File Name="board.mk"/>
+    <File Name="gifam-example-avrio.c"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
-  <VirtualDirectory Name="chip">
-    <File Name="gifam.h"/>
-  </VirtualDirectory>
 </CodeLite_Project>

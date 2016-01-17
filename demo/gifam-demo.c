@@ -1,6 +1,6 @@
 /**
  * gifam_demo.c
- * Test unitaire "Fil pilote"
+ * Démonstration de commande "Fil pilote"
  *
  * Ce test permet de tester la génération du signal pilote à l'aide de la carte
  * d'évaluation gifam-chip-evb et d'un kit DVKCAN1.
@@ -16,6 +16,8 @@
  * - ModeConfortM1 (4) - Secteur 3s / 4'57   - Confort -1 °C
  * - ModeConfortM2 (5) - Secteur 7s / 4'53   - Confort -2 °C
  * La led correspondant au numéro de mode est allumée.
+ * 
+ * This software is governed by the CeCILL license <http://www.cecill.info>
  */
 #include <avrio/delay.h>
 #include <avrio/led.h>

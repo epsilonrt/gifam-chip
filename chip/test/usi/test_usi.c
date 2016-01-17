@@ -24,6 +24,7 @@
 #include <avrio/delay.h>
 #include <avrio/twi-usi.h>
 #include <gifam.h>
+#include "config.h"
 
 /* private variables ======================================================== */
 static volatile uint8_t ucLastWrite;
@@ -66,7 +67,7 @@ int
 main (void) {
   
   vLedInit ();
-  vTwiUsiSlaveInit (GIFAM_ADDRESS);
+  vTwiUsiSlaveInit (TWI_SLAVE_ADDR);
   vTwiUsiSlaveRegisterTxHandler (vTxHandler);
   sei(); // Valide les interruptions.
 

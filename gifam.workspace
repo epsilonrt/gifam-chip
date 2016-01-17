@@ -2,19 +2,27 @@
 <CodeLite_Workspace Name="gifam" Database="" SWTLW="No">
   <Project Name="gifam" Path="gifam.project" Active="No"/>
   <Project Name="gifam-chip-firmware" Path="chip/firmware/gifam-chip-firmware.project" Active="No"/>
-  <Project Name="gifam-avrio-demo" Path="demo/avrio/gifam-avrio-demo.project" Active="Yes"/>
+  <Project Name="gifam-example-avrio" Path="doc/examples/avrio/gifam-example-avrio.project" Active="Yes"/>
+  <Project Name="gifam-example-sysio" Path="doc/examples/sysio/gifam-example-sysio.project" Active="No"/>
+  <Project Name="gifam-demo" Path="demo/gifam-demo.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Project Name="gifam-chip-firmware" ConfigName="Debug"/>
       <Project Name="gifam" ConfigName="Debug"/>
       <Project Name="gifam-chip-firmware" ConfigName="Debug"/>
       <Project Name="gifam-avrio-demo" ConfigName="Debug"/>
+      <Project Name="gifam-example-avrio" ConfigName="Debug"/>
+      <Project Name="gifam-example-sysio" ConfigName="Debug"/>
+      <Project Name="gifam-demo" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Project Name="gifam-chip-firmware" ConfigName="Release"/>
       <Project Name="gifam" ConfigName="Release"/>
       <Project Name="gifam-chip-firmware" ConfigName="Release"/>
       <Project Name="gifam-avrio-demo" ConfigName="Release"/>
+      <Project Name="gifam-example-avrio" ConfigName="Release"/>
+      <Project Name="gifam-example-sysio" ConfigName="Release"/>
+      <Project Name="gifam-demo" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

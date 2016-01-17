@@ -5,7 +5,7 @@
 ###############################################################################
 
 # Nom du fichier cible (sans extension).
-TARGET = gifam_demo
+TARGET = gifam-example-avrio
 
 # Nom du fichier cible (sans extension).
 PROJECT_TOPDIR = .
@@ -39,7 +39,6 @@ GIT_VERSION = OFF
 # Configuration de AvrIO
 # -------------------------------
 AVRIO_CONFIG  = TWI_MASTER_ENABLE
-AVRIO_CONFIG += LED_MASK_ARRAY_ENABLE
 
 # Valide le noyau multitâche temps réel AVRX (sous forme de bibliothèque)
 AVRX = OFF
@@ -87,7 +86,7 @@ DISABLE_DELETE_UNUSED_SECTIONS = OFF
 # Le chemin d'accès des fichiers sources systèmes a été ajouté au chemin de
 # recherche du compilateur, il n'est donc pas nécessaire de préciser le chemin
 # d'accès complet du fichier mais seulement le nom du projet (avrio, avrx, ...)
-SRC  = $(TARGET).c avrio/led.c avrio/button.c avrio/twi_noirq.c gifam.c
+SRC  = $(TARGET).c avrio/twi_noirq.c
 
 # Liste des fichiers source C++. (Les dépendances sont automatiquement générées.)
 # Le chemin d'accès des fichiers sources systèmes a été ajouté au chemin de
