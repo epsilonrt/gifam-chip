@@ -4,7 +4,7 @@
 # This software is governed by the CeCILL license <http://www.cecill.info>    #
 ###############################################################################
 
-SUBDIRS = twi
+SUBDIRS = avrio sysio
 
 all: $(SUBDIRS)
 clean: $(SUBDIRS)

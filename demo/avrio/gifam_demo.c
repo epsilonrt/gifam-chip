@@ -1,12 +1,12 @@
 /**
  * gifam_demo.c
  * Test unitaire "Fil pilote"
- * 
- * Ce test permet de tester la génération du signal pilote à l'aide de la carte 
+ *
+ * Ce test permet de tester la génération du signal pilote à l'aide de la carte
  * d'évaluation gifam-chip-evb et d'un kit DVKCAN1.
- * La carte DVKCAN1 configurée en 3V, est reliée à la carte d'évaluation  
+ * La carte DVKCAN1 configurée en 3V, est reliée à la carte d'évaluation
  * gifam-chip-evb par le bus I2C (TWI CON)
- * 
+ *
  * Au démarrage, le mode confort est sélectionné.
  * Chaque appui sur le bouton poussoir permet de passer au mode suivant:
  * - ModeConfort   (0) - Pas de signal       - Confort
@@ -30,57 +30,66 @@ static void vAssert (bool test);
 /* main ===================================================================== */
 int
 main (void) {
-  eGifamMode eMode = ModeConfort; // Mode de départ
+  eGifamMode eNewMode = ModeConfort; // Mode de départ
+  eGifamMode eCurrentMode = ModeUnknown;
   uint8_t ucTimeOut = 16;
-  
+
   // Initialisation des fonctions
   vLedInit();
   vButInit();
   vTwiInit ();
-  vAssert (eTwiSetSpeed (100) == TWI_SUCCESS);
-  
+  vAssert (eTwiSetSpeed (400) == TWI_SUCCESS);
+
   // Attente de réponse du tiny45, nécessaire lors d'un démarrage de l'alim.
   while (iGifamInit () != 0) {
-    
-    if (ucTimeOut-- == 0)
-      vAssert (0);
-      
+
+    if (ucTimeOut-- == 0) {
+
+      vAssert (0); // bloque et fait clignoter la led 7
+    }
+
     delay_ms (100);
   }
 
   for (;;) {
 
-    vGifamSet (eMode);
-    vLedClear (LED_ALL_LEDS);
-    vLedSet (xLedGetMask (eMode));
-    
+    if (eNewMode != eCurrentMode) {
+      // Le nouveau mode est différent du courant
+      vGifamSet (eNewMode); // modification du mode
+      eCurrentMode = eGifamGet(); // lecture du mode
+      vAssert (eCurrentMode == eNewMode); // vérification
+      vLedClear (LED_ALL_LEDS); // extinction des leds
+      // affichage de la led correspondant au numéro du mode
+      vLedSet (xLedGetMask (eNewMode)); 
+    }
+
     // Attente appui BP
-    while (xButGet(BUTTON_BUTTON1) == 0)
+    while (xButGet (BUTTON_BUTTON1) == 0)
       ;
-    
-    if ((eMode == ModeEco)||(eMode == ModeConfortM1)) {
-    
+
+    if ( (eNewMode == ModeEco) || (eNewMode == ModeConfortM1)) {
+
       // Remets le fil au repos afin de pouvoir mesurer la durée d'activation
       // des modes étendus
       vGifamSet (ModeConfort);
       // Attente appui BP
       delay_ms (250);
-      while (xButGet(BUTTON_BUTTON1) == 0) {
+      while (xButGet (BUTTON_BUTTON1) == 0) {
 
-        vLedToggle (xLedGetMask (eMode));
-        delay_ms (20);
+        vLedToggle (xLedGetMask (eNewMode));
+        delay_ms (50);
       }
     }
-    
+
     delay_ms (250);
     // Passe au mode suivant
-    if (eMode < ModeConfortM2) {
-    
-      eMode++;
+    if (eNewMode < ModeConfortM2) {
+
+      eNewMode++;
     }
     else {
-    
-      eMode = ModeConfort;
+
+      eNewMode = ModeConfort;
     }
   }
   return 0;

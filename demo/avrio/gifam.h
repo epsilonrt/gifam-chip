@@ -17,7 +17,8 @@ typedef enum {
   ModeHorsGel   = 2, /**< 2 - Alternance Négative - Hors Gel */
   ModeEco       = 3, /**< 3 - Deux Alternances    - Economique */
   ModeConfortM1 = 4, /**< 4 - Secteur 3s / 4'57   - Confort -1 °C */
-  ModeConfortM2 = 5  /**< 5 - Secteur 7s / 4'53   - Confort -2 °C */
+  ModeConfortM2 = 5, /**< 5 - Secteur 7s / 4'53   - Confort -2 °C */
+  ModeUnknown   = -1 /**< -1 - Mode inconnu */
 } eGifamMode;
 
 /* setup ==================================================================== */
