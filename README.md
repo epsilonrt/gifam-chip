@@ -13,6 +13,10 @@ __gifam-chip__ est Copyright © 2013-2016 epsilonRT
 Les sources du firmware __gifam-chip__ et du hardware de la carte d'évaluation sont diffusées sous licence open source
 CeCILL <http://www.cecill.info>.
 
+Le projet est diffusé à l'aide de git, les sources peuvent être consultées sur <http://gitweb.epsilonrt.com/gifam-chip.git> et peut être cloné à l'aide de la commande suivante :
+
+>git clone http://git.epsilonrt.com/gifam-chip
+
 ## Spécifications éléctriques
 Les spécifications électriques sont celles du [attiny45](http://www.atmel.com/devices/attiny45.aspx) et peuvent être consultées dans le paragraphe correspondant de son [datasheet](http://www.atmel.com/Images/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf). 
 
