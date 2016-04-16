@@ -4,7 +4,7 @@
  *
  * Ce test permet de tester la génération du signal pilote à l'aide de la carte
  * d'évaluation gifam-chip-evb et d'un kit DVKCAN1.
- * La carte DVKCAN1 configurée en 3V, est reliée à la carte d'évaluation
+ * La carte DVKCAN1 configurée en 3,3V, est reliée à la carte d'évaluation
  * gifam-chip-evb par le bus I2C (TWI CON)
  *
  * Au démarrage, le mode confort est sélectionné.

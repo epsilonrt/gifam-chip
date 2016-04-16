@@ -125,9 +125,9 @@
   </Settings>
   <VirtualDirectory Name="gifam-demo">
     <File Name="Makefile"/>
-    <File Name="gifam_demo.c"/>
     <File Name="gifam.c"/>
     <File Name="gifam.h"/>
+    <File Name="gifam-demo.c"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
