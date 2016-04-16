@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="gifam" Database="">
   <Project Name="gifam" Path="gifam.project" Active="No"/>
-  <Project Name="gifam-chip-firmware" Path="chip/firmware/gifam-chip-firmware.project" Active="Yes"/>
+  <Project Name="gifam-chip-firmware" Path="chip/firmware/gifam-chip-firmware.project" Active="No"/>
   <Project Name="gifam-example-avrio" Path="doc/examples/avrio/gifam-example-avrio.project" Active="No"/>
   <Project Name="gifam-example-sysio" Path="doc/examples/sysio/gifam-example-sysio.project" Active="No"/>
-  <Project Name="gifam-demo" Path="demo/gifam-demo.project" Active="No"/>
+  <Project Name="gifam-demo" Path="demo/gifam-demo.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Project Name="gifam-chip-firmware" ConfigName="Debug"/>
