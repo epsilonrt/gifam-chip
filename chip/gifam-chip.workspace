@@ -24,7 +24,7 @@
       <Project Name="gifam-chip" ConfigName="Debug"/>
       <Project Name="gifam-demo" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="yes">
+    <WorkspaceConfiguration Name="Release" Selected="no">
       <Environment/>
       <Project Name="gifam-chip-firmware" ConfigName="Release"/>
       <Project Name="gifam-chip-test-delay" ConfigName="Release"/>

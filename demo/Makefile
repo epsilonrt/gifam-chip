@@ -65,7 +65,7 @@ DEBUG_FORMAT = dwarf-2
 #     0 = pas d'optimisation (pour debug).
 #     s = optimisation de la taille du code (pour release).
 #     (Note: 3 n'est pas toujours le meilleur niveau. Voir la FAQ avr-libc.)
-DEBUG_OPT = s
+DEBUG_OPT = 0
 
 # Retrait des informations Debug (ON/OFF)
 # Si défini sur ON, aucune information de debug ne sera générée
@@ -175,8 +175,9 @@ AVRDUDE_PORT = usb
 #---------------- Debugging Options ----------------
 
 # Set the DEBUG_UI to either gdb or insight.
-# DEBUG_UI = gdb
-DEBUG_UI = insight
+#DEBUG_UI = gdb
+DEBUG_UI = cgdb
+#DEBUG_UI = insight
 
 # Set the debugging back-end to either avarice, simulavr.
 DEBUG_BACKEND = avarice
@@ -184,6 +185,10 @@ DEBUG_BACKEND = avarice
 
 # When using avarice settings for the JTAG
 JTAG_DEV = usb
+
+AVARICE_OPT = --dragon 
+#AVARICE_OPT = --mkII
+AVARICE_BITRATE = --jtag-bitrate 2MHz
 
 #------------------------------------------------------------------------------
 include $(AVRIO_TOPDIR)/script/common.mk

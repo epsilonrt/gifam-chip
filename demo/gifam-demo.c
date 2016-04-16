@@ -16,7 +16,7 @@
  * - ModeConfortM1 (4) - Secteur 3s / 4'57   - Confort -1 °C
  * - ModeConfortM2 (5) - Secteur 7s / 4'53   - Confort -2 °C
  * La led correspondant au numéro de mode est allumée.
- * 
+ *
  * This software is governed by the CeCILL license <http://www.cecill.info>
  */
 #include <avrio/delay.h>
@@ -34,35 +34,43 @@ int
 main (void) {
   eGifamMode eNewMode = ModeConfort; // Mode de départ
   eGifamMode eCurrentMode = ModeUnknown;
-  uint8_t ucTimeOut = 16;
+  int iTimeOut = 16;
 
   // Initialisation des fonctions
   vLedInit();
   vButInit();
   vTwiInit ();
-  vAssert (eTwiSetSpeed (400) == TWI_SUCCESS);
+  eTwiSetSpeed (400);
 
   // Attente de réponse du tiny45, nécessaire lors d'un démarrage de l'alim.
   while (iGifamInit () != 0) {
 
-    if (ucTimeOut-- == 0) {
+    if (iTimeOut-- <= 0) {
 
       vAssert (0); // bloque et fait clignoter la led 7
     }
-
-    delay_ms (500);
+    delay_ms (100);
   }
 
   for (;;) {
 
     if (eNewMode != eCurrentMode) {
-      // Le nouveau mode est différent du courant
-      vGifamSet (eNewMode); // modification du mode
-      eCurrentMode = eGifamGet(); // lecture du mode
-      vAssert (eCurrentMode == eNewMode); // vérification
+
+      while (eNewMode != eCurrentMode) {
+
+        // Le nouveau mode est différent du courant
+        vGifamSet (eNewMode); // modification du mode
+        eCurrentMode = eGifamGet(); // lecture du mode
+        if (eNewMode != eCurrentMode) {
+
+          delay_ms (500);
+          vLedToggle (LED_LED0);
+        }
+      }
+
       vLedClear (LED_ALL_LEDS); // extinction des leds
       // affichage de la led correspondant au numéro du mode
-      vLedSet (xLedGetMask (eNewMode)); 
+      vLedSet (xLedGetMask (eNewMode));
     }
 
     // Attente appui BP

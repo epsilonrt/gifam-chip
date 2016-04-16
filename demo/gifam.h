@@ -18,7 +18,8 @@ typedef enum {
   ModeEco       = 3, /**< 3 - Deux Alternances    - Economique */
   ModeConfortM1 = 4, /**< 4 - Secteur 3s / 4'57   - Confort -1 °C */
   ModeConfortM2 = 5, /**< 5 - Secteur 7s / 4'53   - Confort -2 °C */
-  ModeUnknown   = -1 /**< -1 - Mode inconnu */
+  ErrorNoMain  = -2, /**< Erreur, pas fréquence secteur détectée */
+  ModeUnknown  = -1  /**< -1 - Mode inconnu */
 } eGifamMode;
 
 /* setup ==================================================================== */
@@ -39,6 +40,9 @@ int8_t iGifamInit (void);
 
 /**
  * @brief Modifie le mode du fil pilote
+ * 
+ * Si le secteur n'a pas été détecté lors de l'initialisation, cette fonction
+ * cherche à le détecter avant de régler le mode.
  * @param eMode le nouveau mode
  */
 void vGifamSet (eGifamMode eMode);

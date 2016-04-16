@@ -202,6 +202,9 @@ eGifamSet (eGifamMode eMode) {
       case ModeConfortM2:
         ucGifamState  = GIFAM_EXTEND + GIFAM_EXT_M2;
         break;
+      default:
+        eMode = eGifamCurrentMode;
+        break;
     }
   }
   eGifamCurrentMode  = eMode;

@@ -23,7 +23,7 @@ typedef enum {
   ModeEco       = 3,  // 3 - Deux Alternances    - Economique
   ModeConfortM1 = 4,  // 4 - Secteur 3s / 4'57   - Confort -1 °C
   ModeConfortM2 = 5,  // 5 - Secteur 7s / 4'53   - Confort -2 °C
-  ErrorNoMain   = -1  // Pas fréquence secteur détectée
+  ErrorNoMain   = -2  // Pas fréquence secteur détectée
 } eGifamMode;
 
 /* internal public functions ================================================ */
