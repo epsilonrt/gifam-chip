@@ -55,6 +55,7 @@
 typedef uint8_t uZcrossValue;
 
 #define ZCROSS_TIMER_PRESCALER  512
+#define ZCROSS_MAINCHECK_TIMEOUT 500
 
 // -----------------------------------------------------------------------------
 static inline void

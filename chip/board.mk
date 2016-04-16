@@ -43,7 +43,9 @@ AVRDUDE_PORT = usb
 endif
 
 # Fuses and lock for fuse target
-AVRDUDE_LFUSE = 0xE2
+# Internal RC osc, 8 MHz, 4ms delay
+AVRDUDE_LFUSE = 0xD2
+# SPIEN
 AVRDUDE_HFUSE = 0xDF
 #AVRDUDE_EFUSE = 0x01
 AVRDUDE_LOCK  = 0x00

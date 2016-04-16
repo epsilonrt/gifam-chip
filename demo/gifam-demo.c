@@ -50,7 +50,7 @@ main (void) {
       vAssert (0); // bloque et fait clignoter la led 7
     }
 
-    delay_ms (100);
+    delay_ms (500);
   }
 
   for (;;) {

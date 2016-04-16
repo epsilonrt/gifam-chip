@@ -26,11 +26,11 @@ main (void) {
   eGifamMode eMode = ModeConfort;
   
   vButInit();
-  iGifamInit ();
+  (void) iGifamInit ();
 
   for (;;) {
 
-    vGifamSet (eMode);
+    (void) eGifamSet (eMode);
     
     // Attente appui BP
     while (xButGet(BUTTON_BUTTON1) == 0)
@@ -40,7 +40,7 @@ main (void) {
     
       // Remets le fil au repos afin de pouvoir mesurer la durée d'activation
       // des modes étendus
-      vGifamSet (ModeConfort);
+      (void) eGifamSet (ModeConfort);
       // Attente appui BP
       delay_ms (250);
       while (xButGet(BUTTON_BUTTON1) == 0)

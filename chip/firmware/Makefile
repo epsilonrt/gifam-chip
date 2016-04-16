@@ -67,7 +67,7 @@ DEBUG_OPT = s
 
 # Retrait des informations Debug (ON/OFF)
 # Si défini sur ON, aucune information de debug ne sera générée
-DEBUG = ON
+#DEBUG = ON
 
 # Affiche la ligne de compilation GCC ou non (ON/OFF)
 VIEW_GCC_LINE = OFF

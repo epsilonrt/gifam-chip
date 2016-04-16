@@ -8,6 +8,7 @@
  */
 #include <firmware/zcross.h>
 #include "config.h"
+#include <avrio/delay.h>
 
 /* macros =================================================================== */
 // Calcul de la période max en µs
@@ -41,13 +42,25 @@ prvvZcrossIrqDisable (void) {
 }
 
 // -----------------------------------------------------------------------------
-static inline void
-prvvZcrossMesMainFreq (void) {
-
+#define LOOP_DELAY 100
+static inline int8_t
+prviZcrossMesMainFreq (void) {
+  int iTimeout = ZCROSS_MAINCHECK_TIMEOUT;
+  
   for (;;) {
 
-    while (bMainChecked == false)
-      ;
+    while (bMainChecked == false) {
+      
+      if (iTimeout <= 0) {
+        
+        return -1;
+      }
+#ifdef DEBUG
+      GIFAMOUT_PORT  ^= _BV(GIFAMOUT_BIT);
+#endif
+      delay_ms (LOOP_DELAY);
+      iTimeout -= LOOP_DELAY;
+    }
     usMainSum /= ZCROSS_COUNT_MAX;
 
     if ( (usMainSum >= P_MIN (60.0)) && (usMainSum <= P_MAX (60.0))) {
@@ -67,9 +80,11 @@ prvvZcrossMesMainFreq (void) {
         usMainCounter = 0;
         bMainChecked = false;
         prvvZcrossIrqEnable ();
+        return -1;
       }
     }
   }
+  return 0;
 }
 
 // -----------------------------------------------------------------------------
@@ -111,6 +126,23 @@ ISR (ZCROSS_vect) {
 
 /* internal public functions ================================================ */
 // -----------------------------------------------------------------------------
+int8_t
+iZcrossMainCheck (void) {
+  
+  prvvZcrossIrqEnable();
+  sei();
+  
+  if (prviZcrossMesMainFreq() == 0) {
+    
+    prvvZcrossIrqEnable();
+    return 0;
+  }
+  
+  prvvZcrossIrqDisable();
+  return ZCROSS_ERROR_NOMAIN;
+}
+
+// -----------------------------------------------------------------------------
 void
 vZcrossInit (vZcrossHandler vHandler) {
 
@@ -120,10 +152,6 @@ vZcrossInit (vZcrossHandler vHandler) {
   ZCROSS_PCMSK  |= _BV (ZCROSS_PCINT);
   vZcrossTimerInit();
   vUserHandler = vHandler;
-  prvvZcrossIrqEnable();
-  sei();
-  prvvZcrossMesMainFreq();
-  prvvZcrossIrqEnable();
 }
 
 // -----------------------------------------------------------------------------
@@ -142,6 +170,13 @@ uint16_t
 usZcrossMainFreq (void) {
 
   return usMainFreq;
+}
+
+// -----------------------------------------------------------------------------
+bool
+bZcrossMainIsChecked (void) {
+
+  return bMainChecked;
 }
 
 // -----------------------------------------------------------------------------

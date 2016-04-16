@@ -22,12 +22,31 @@ typedef enum {
   ModeHorsGel   = 2,  // 2 - Alternance Négative - Hors Gel
   ModeEco       = 3,  // 3 - Deux Alternances    - Economique
   ModeConfortM1 = 4,  // 4 - Secteur 3s / 4'57   - Confort -1 °C
-  ModeConfortM2 = 5   // 5 - Secteur 7s / 4'53   - Confort -2 °C
+  ModeConfortM2 = 5,  // 5 - Secteur 7s / 4'53   - Confort -2 °C
+  ErrorNoMain   = -1  // Pas fréquence secteur détectée
 } eGifamMode;
 
 /* internal public functions ================================================ */
+/**
+ * @brief Initialise le module Gifam
+ * @return 0, -1 si la secteur n'a pas été détecté
+ */
 int8_t iGifamInit (void);
-void vGifamSet (eGifamMode eMode);
+
+/**
+ * @brief Modifie le mode Gifam
+ * 
+ * Si le secteur n'a pas été détecté lors de l'initialisation, cette fonction
+ * cherche à le détecter avant de régler le mode.
+ * @param eMode le nouveau mode
+ * @return le mode réglé, ErrorNoMain si pas de secteur
+ */
+eGifamMode eGifamSet (eGifamMode eMode);
+
+/**
+ * @brief Lecture du mode Gifam en cours
+ * @return le mode réglé, ErrorNoMain si pas de secteur
+ */
 eGifamMode eGifamGet (void);
 
 /* ========================================================================== */

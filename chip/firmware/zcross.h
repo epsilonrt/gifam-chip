@@ -12,6 +12,8 @@
 #include <avrio/defs.h>
 
 /* constants ================================================================ */
+#define ZCROSS_ERROR_NOMAIN 1
+
 typedef void (*vZcrossHandler) (void);
 
 /* internal public functions ================================================ */
@@ -19,7 +21,8 @@ void vZcrossInit (vZcrossHandler pvZcrossHandler);
 void vZcrossEnable (void);
 void vZcrossDisable (void);
 bool bZcrossIsPositive (void);
+int8_t iZcrossMainCheck (void);
 uint16_t usZcrossMainFreq (void);
-
+bool bZcrossMainIsChecked (void);
 /* ========================================================================== */
 #endif  /* _ZCROSS_H_ not defined */

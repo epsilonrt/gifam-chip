@@ -38,7 +38,7 @@ prvvInit (void) {
   }
   vTwiUsiSlaveInit (ucSlaveAddr);
   vTwiUsiSlaveRegisterTxHandler (prvvTxHandler);
-  iGifamInit();
+  (void) iGifamInit();
 }
 
 /* main ===================================================================== */
@@ -46,7 +46,7 @@ int
 main (void) {
 
   prvvInit();
-  vGifamSet (GIFAM_MODE_DEFAULT);
+  (void) eGifamSet (GIFAM_MODE_DEFAULT);
 
   for (;;) {
 
@@ -57,7 +57,7 @@ main (void) {
       ucNewMode = ucTwiUsiSlaveRead();
       if (ucNewMode <= ModeConfortM2) {
 
-        vGifamSet ( (eGifamMode) ucNewMode);
+        (void) eGifamSet ( (eGifamMode) ucNewMode);
       }
     }
   }
