@@ -1,6 +1,10 @@
-<link href="http://kevinburke.bitbucket.org/markdowncss/markdown.css" rel="stylesheet"></link>
-
 #Gifam Chip
+
+*Circuit interface I²C - Fil pilote GIFAM*
+
+---
+Copyright © 2013-2016 epsilonRT, All rights reserved.
+
 __Gifam chip__ permet la commande d'un radiateur électrique équipé d'un fil 
 pilote à l'aide d'un microcontroleur ATMEL AVR 
 [attiny45](http://www.atmel.com/devices/attiny45.aspx) à 8 broches. 
@@ -15,15 +19,12 @@ tension (Raspberry Pi, Arduino ...). La vitesse d'horloge maximale est de 400 kH
 Le projet fournit aussi le schéma d'une carte d'évaluation permettant de 
 prendre en main rapidement gifam-chip.
 
-__gifam-chip__ est Copyright © 2013-2016 epsilonRT 
-<epsilonrt@btssn.net>, All rights reserved.
-
 Les sources du firmware __gifam-chip__ et du hardware de la carte d'évaluation 
 sont diffusées sous licence open source
 CeCILL <http://www.cecill.info>.
 
 Le projet est diffusé à l'aide de git, les sources peuvent être consultées sur
- <http://gitweb.epsilonrt.com/gifam-chip.git> et peut être cloné à l'aide de 
+ <https://github.com/epsilonrt/gifam-chip> et peut être cloné à l'aide de 
  la commande suivante :
 
 >git clone http://github.com/epsilonrt/gifam-chip.git
@@ -36,7 +37,7 @@ consultées dans le paragraphe correspondant de son
 
 ## Brochage et fonctions des broches
 
-![Brochage](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/pinout.png)
+![Brochage](https://raw.githubusercontent.com/epsilonrt/gifam-chip/master/doc/img/pinout.png)
 
 Le firmware par défaut définit les fonctions de broches de la façon suivante:
 <table>
@@ -109,7 +110,7 @@ L'octet lu ou écrit (Mode byte) peut prendre les valeurs suivantes:
 Les exemples ci-dessous effectuent tous un passage en revue des modes 0 à 3 
 (Confort, Arret forcé, Hors Gel, Economique...). Le code complet de ses exemples 
 est disponible dans le répertoire 
-[doc/examples](http://gitweb.epsilonrt.com/gifam-chip.git/tree/HEAD:/doc/examples)
+[doc/examples](https://github.com/epsilonrt/gifam-chip/tree/master/doc/examples)
 
 ####ATMEL AVR en C (AvrIO)
 [AvrIO](http://www.epsilonrt.com/avrio) est un projet Open Source sous GNU 
@@ -229,17 +230,17 @@ ___Il suffit donc de désactiver CKDIV8 lorsqu'on doit paramètrer un
 ###Programmation du firmware
 
 La dernière version du firmware est disponible dans le dossier 
-[firmware/](http://gitweb.epsilonrt.com/gifam-chip.git/tree/HEAD:/firmware)
+[firmware/](https://github.com/epsilonrt/gifam-chip/tree/master/firmware)
 
 ###Modification du firmware
 Il est possible de modifier la configuration du firmware grâce au fichier 
-[chip/config.h](http://gitweb.epsilonrt.com/gifam-chip.git/blob/HEAD:/chip/config.h)
+[chip/config.h](https://github.com/epsilonrt/gifam-chip/blob/master/chip/config.h)
 
 ##Carte d'évaluation
 Le schéma complet de la carte d'évaluation __gifam-chip-evb__ est disponible 
-dans le dossier [hardware/](http://gitweb.epsilonrt.com/gifam-chip.git/tree/HEAD:/hardware) 
+dans le dossier [hardware/](https://github.com/epsilonrt/gifam-chip/tree/master/hardware) 
 au format Proteus 7 avec son PCB et au format PDF dans le dossier 
-[doc/img/](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/gifam-chip-evb.pdf) :
+[doc/img/](https://github.com/epsilonrt/gifam-chip/raw/master/doc/img/gifam-chip-evb.pdf) :
 
 - J2 asure la liaison I²C vers la carte de contrôle DVKCAN1, Raspberry Pi, Arduino...
 - La phase __L__ et le neutre __N__ du secteur sont connectées à J1 ainsi que 
@@ -257,7 +258,7 @@ au format Proteus 7 avec son PCB et au format PDF dans le dossier
 ###Analyse du fonctionnement de la commande secteur
 
 ####Détection de zéro
-![Détection de zéro](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/zcross.png)
+![Détection de zéro](https://raw.githubusercontent.com/epsilonrt/gifam-chip/master/doc/img/zcross.png)
 
 Le signal de phase du secteur __L__ est transformé en un signal rectangulaire 
 __ZC__ en opposition de phase avec ce dernier. R7, D4 et D7 assure un 
@@ -270,7 +271,7 @@ signel __ZC__ à 0. Lors de l'alternance négative du secteur, Q1 est
 bloqué, la led de U1 est éteinte et ZC est à l'état haut.
 
 ####Alimentation capacitive sans transformateur
-![Alimentation capacitive](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/powersupply.png)
+![Alimentation capacitive](https://raw.githubusercontent.com/epsilonrt/gifam-chip/master/doc/img/powersupply.png)
 
 Cette alimentation fournit le +5V nécessaire à l'alimentation de la 
 led de U1 à partir du secteur. Il s'agit d'une alimentation capacitive 
@@ -291,7 +292,7 @@ document
 [AN954 Transformerless Power Supplies: Resistive and Capacitive](http://ww1.microchip.com/downloads/en/AppNotes/00954A.pdf) de Microchip.
 
 ####Interrupteur commandé
-![Interrupteur commandé](http://gitweb.epsilonrt.com/gifam-chip.git/blob_plain/HEAD:/doc/img/acswitch.png)
+![Interrupteur commandé](https://raw.githubusercontent.com/epsilonrt/gifam-chip/master/doc/img/acswitch.png)
 
 Cette partie permet de découper la tension secteur __L__ pour générer 
 le signal pilote __G__. L'opto-triac U3 assure un isolement galvanique 
