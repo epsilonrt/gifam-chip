@@ -2,8 +2,7 @@
  * @file gifam.c
  * @brief Génération fil pilote GIFAM 6 ordres avec ATtiny45 (Implémentation)
  *
- * Copyright © 2013-2016 Pascal JEAN aka epsilonRT <pascal.jean--AT--btssn.net>
- * All rights reserved.
+ * Copyright © 2013-2016 epsilonRT, All rights reserved.
  * This software is governed by the CeCILL license <http://www.cecill.info>
  */
 #include <util/atomic.h>

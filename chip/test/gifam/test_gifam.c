@@ -12,8 +12,7 @@
  * - ModeConfortM1 (4) - Secteur 3s / 4'57   - Confort -1 °C
  * - ModeConfortM2 (5) - Secteur 7s / 4'53   - Confort -2 °C
  *
- * Copyright © 2013-2016 Pascal JEAN aka epsilonRT <pascal.jean--AT--btssn.net>
- * All rights reserved.
+ * Copyright © 2013-2016 epsilonRT, All rights reserved.
  * This software is governed by the CeCILL license <http://www.cecill.info>
  */
 #include <avrio/delay.h>

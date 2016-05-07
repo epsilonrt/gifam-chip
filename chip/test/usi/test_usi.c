@@ -16,8 +16,7 @@
  * Les 2 tests peuvent être enchainés, soit au coup par coup (appui sur la barre
  * espace côté maître) soit très rapidement de façon à stresser l'esclave.
  *
- * Copyright © 2013-2016 Pascal JEAN aka epsilonRT <pascal.jean--AT--btssn.net>
- * All rights reserved.
+ * Copyright © 2013-2016 epsilonRT, All rights reserved.
  * This software is governed by the CeCILL license <http://www.cecill.info>
  */
 #include <avrio/led.h>
