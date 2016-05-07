@@ -5,6 +5,10 @@
 ---
 Copyright © 2013-2016 epsilonRT, All rights reserved.
 
+<a href="http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html">
+  <img src="https://raw.githubusercontent.com/epsilonrt/gxPL/master/doc/images/osi.png" alt="osi.png" align="right" valign="top">
+</a>
+
 __Gifam chip__ permet la commande d'un radiateur électrique équipé d'un fil 
 pilote à l'aide d'un microcontroleur ATMEL AVR 
 [attiny45](http://www.atmel.com/devices/attiny45.aspx) à 8 broches. 
@@ -113,8 +117,8 @@ est disponible dans le répertoire
 [doc/examples](https://github.com/epsilonrt/gifam-chip/tree/master/doc/examples)
 
 ####ATMEL AVR en C (AvrIO)
-[AvrIO](http://www.epsilonrt.com/avrio) est un projet Open Source sous GNU 
-Lesser General Public License Version 3 dont l'objectif est d'offrir une 
+[AvrIO](http://www.epsilonrt.com/avrio) est un projet Open Source sous 
+CeCILL Free Software License Version 2.1 dont l'objectif est d'offrir une 
 bibliothèque C pour les microcontrôleurs AVR d'Atmel.
 
 On utilise le module twi de AvrIO, par exemple :
